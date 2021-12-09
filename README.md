@@ -2,6 +2,6 @@
 
 ## Liens utiles
 
-https://developers.deezer.com/api
-https://cors-anywhere.herokuapp.com/corsdemo
+- `https://developers.deezer.com/api`
+- `https://cors-anywhere.herokuapp.com/corsdemo`
 
