@@ -7,9 +7,9 @@ import { DeezerService } from "../deezer.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
   constructor(public deezerService: DeezerService) { }
 
   ngOnInit(): void {
+    console.log(this.deezerService.response)
   }
 }

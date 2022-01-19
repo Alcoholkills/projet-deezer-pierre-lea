@@ -22,5 +22,8 @@ export class HeaderComponent implements OnInit {
   public async onSubmit() {
     const obs$: Observable<any> = this.deezerService.getArtist();
     this.deezerService.response = await firstValueFrom(obs$);
+    // this.deezerService.response est un array
+
+    console.log(this.deezerService.response)
   }
 }
