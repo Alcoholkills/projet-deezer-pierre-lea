@@ -12,7 +12,10 @@ export class DeezerService {
   constructor(private http: HttpClient) { }
 
   public getArtist() {
-    const url: string = this.baseUrl + "search/track/autocomplete?limit=1&q=eminem";
+    // const url: string = this.baseUrl + "search/track/autocomplete?limit=1&q=eminem";
+    // const url: string = this.baseUrl + "/album/302127";
+    // const url: string = this.baseUrl + "/artist/27";
+    const url: string = this.baseUrl + "/track/3135556";
     return this.http.get(url);
   }
 }
