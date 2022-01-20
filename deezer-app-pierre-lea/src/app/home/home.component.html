@@ -1,1 +1,49 @@
-<p *ngIf="deezerService.response">{{ deezerService.response.data[0].artist.name }}</p>
+<div class="container py-5" style="min-height: 700px;">
+  <div *ngIf="deezerService.responseArtist" class="card w-50 m-auto">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let item of deezerService.responseArtist.data" class="list-group-item">
+        <div class="row">
+          <div class="col-md-2">
+            <img src="{{ item.picture_small }}" alt="Photo"/>
+          </div>
+          <div class="col">
+            <div class="row">{{ item.name }}</div>
+            <div class="row small text-muted">{{ item.nb_fan }} fans</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="deezerService.responseTrack" class="card w-50 m-auto">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let item of deezerService.responseTrack.data " class="list-group-item">
+        <div class="row">
+          <div class="col-md-2">
+            <img src="{{ item.album.cover_small }}" alt="Couverture"/>
+          </div>
+          <div class="col">
+            <div class="row">{{ item.title }}</div>
+            <div class="row small text-muted">{{ item.artist.name }}</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="deezerService.responseAlbum" class="card w-50 m-auto">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let item of deezerService.responseAlbum.data" class="list-group-item">
+        <div class="row">
+          <div class="col-md-2">
+            <img src="{{ item.cover_small }}" alt="Couverture"/>
+          </div>
+          <div class="col">
+            <div class="row">{{ item.title }}</div>
+            <div class="row small text-muted">{{ item.artist.name }}</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

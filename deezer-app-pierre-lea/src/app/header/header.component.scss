@@ -8,10 +8,10 @@
   background-color: #990000;
 }
 
-input[type="search"] {
+input[type="search"], select {
   border-color: #990000;
 }
 
-input[type="search"]:focus {
+input[type="search"]:focus, select:focus {
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(153,0,0,.6);
 }

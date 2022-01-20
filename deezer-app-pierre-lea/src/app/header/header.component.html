@@ -5,8 +5,13 @@
       Hear It
     </a>
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="d-flex">
-      <input class="form-control me-2" type="search" formControlName="search" placeholder="Rechercher" aria-label="Search">
-      <button class="btn btn-outline-burgundy" type="submit">Rechercher</button>
+      <select class="form-select me-2" id="category" formControlName="category">
+        <option value="artist">Artiste</option>
+        <option value="track">Titre</option>
+        <option value="album">Album</option>
+      </select>
+      <input class="form-control me-2" type="search" id="search" formControlName="search" placeholder="Rechercher" aria-label="Search">
+      <button class="btn btn-outline-burgundy" type="submit" [disabled]="searchForm.invalid">Rechercher</button>
     </form>
   </div>
 </nav>

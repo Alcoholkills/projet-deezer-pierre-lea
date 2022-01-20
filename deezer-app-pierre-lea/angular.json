@@ -4,6 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "deezer-app-pierre-lea": {
+      "i18n": {
+        "sourceLocale": "fr-FR"
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
