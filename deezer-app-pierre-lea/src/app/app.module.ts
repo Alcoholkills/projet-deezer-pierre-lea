@@ -1,4 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http";
 
@@ -9,6 +12,8 @@ import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from './home/home.component';
 
+registerLocaleData(localeFr);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,13 +21,15 @@ import { HomeComponent } from './home/home.component';
     FooterComponent,
     HomeComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

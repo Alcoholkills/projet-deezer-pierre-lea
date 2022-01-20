@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DeezerService } from "../deezer.service";
+import { PaginationService } from "../pagination.service";
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { DeezerService } from "../deezer.service";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public deezerService: DeezerService) { }
+  constructor(public deezerService: DeezerService, public paginationService: PaginationService) { }
 
   ngOnInit(): void {
   }

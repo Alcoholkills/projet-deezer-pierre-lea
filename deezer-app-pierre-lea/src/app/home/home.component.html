@@ -1,21 +1,27 @@
-<div class="container py-5" style="min-height: 700px;">
-  <div *ngIf="deezerService.responseArtist" class="card w-50 m-auto">
+<div *ngIf="deezerService.responseArtist">
+  <div *ngIf="deezerService.responseArtist.data.length > 0; else noArtist" class="card w-50 m-auto">
     <ul class="list-group list-group-flush">
       <li *ngFor="let item of deezerService.responseArtist.data" class="list-group-item">
         <div class="row">
           <div class="col-md-2">
-            <img src="{{ item.picture_small }}" alt="Photo"/>
+            <img class="rounded-circle" src="{{ item.picture_small }}" alt="Photo"/>
           </div>
           <div class="col">
             <div class="row">{{ item.name }}</div>
-            <div class="row small text-muted">{{ item.nb_fan }} fans</div>
+            <div class="row small text-muted">{{ item.nb_fan | number }} fans</div>
           </div>
         </div>
       </li>
     </ul>
   </div>
 
-  <div *ngIf="deezerService.responseTrack" class="card w-50 m-auto">
+  <ng-template #noArtist>
+    <p class="lead">Oups... Aucun artiste trouvé.</p>
+  </ng-template>
+</div>
+
+<div *ngIf="deezerService.responseTrack">
+  <div *ngIf="deezerService.responseTrack.data.length > 0; else noTrack" class="card w-50 m-auto">
     <ul class="list-group list-group-flush">
       <li *ngFor="let item of deezerService.responseTrack.data " class="list-group-item">
         <div class="row">
@@ -31,7 +37,13 @@
     </ul>
   </div>
 
-  <div *ngIf="deezerService.responseAlbum" class="card w-50 m-auto">
+  <ng-template #noTrack>
+    <p class="lead">Oups... Aucun titre trouvé.</p>
+  </ng-template>
+</div>
+
+<div *ngIf="deezerService.responseAlbum">
+  <div *ngIf="deezerService.responseAlbum.data.length > 0; else noAlbum" class="card w-50 m-auto">
     <ul class="list-group list-group-flush">
       <li *ngFor="let item of deezerService.responseAlbum.data" class="list-group-item">
         <div class="row">
@@ -46,4 +58,26 @@
       </li>
     </ul>
   </div>
+
+  <ng-template #noAlbum>
+    <p class="lead">Oups... Aucun album trouvé.</p>
+  </ng-template>
 </div>
+
+<nav *ngIf="deezerService.responseArtist || deezerService.responseTrack || deezerService.responseAlbum" class="mt-3" aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <button class="page-link" (click)="paginationService.prev()">
+        <span>&laquo;</span>
+      </button>
+    </li>
+    <li class="page-item disabled">
+      <span class="page-link">{{ paginationService.currentPage + 1 }} sur {{ paginationService.nbPages }}</span>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="paginationService.next()">
+        <span>&raquo;</span>
+      </button>
+    </li>
+  </ul>
+</nav>
