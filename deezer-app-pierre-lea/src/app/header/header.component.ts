@@ -32,21 +32,21 @@ export class HeaderComponent implements OnInit {
       this.deezerService.responseArtist = await firstValueFrom(obs$);
       this.deezerService.responseAlbum = null;
       this.deezerService.responseTrack = null;
-      this.paginationService.nbPages = this.deezerService.responseArtist.total/this.paginationService.nbPerPage;
+      this.paginationService.nbPages = Math.ceil(this.deezerService.responseArtist.total/this.paginationService.nbPerPage);
       console.warn(this.deezerService.responseArtist);
     } else if (this.deezerService.category === "track") {
       const obs$: Observable<any> = this.deezerService.getTracksList(this.deezerService.search, this.paginationService.currentItem, this.paginationService.nbPerPage);
       this.deezerService.responseTrack = await firstValueFrom(obs$);
       this.deezerService.responseArtist = null;
       this.deezerService.responseAlbum = null;
-      this.paginationService.nbPages = this.deezerService.responseTrack.total/this.paginationService.nbPerPage;
+      this.paginationService.nbPages = Math.ceil(this.deezerService.responseTrack.total/this.paginationService.nbPerPage);
       console.warn(this.deezerService.responseTrack);
     } else {
       const obs$: Observable<any> = this.deezerService.getAlbumsList(this.deezerService.search, this.paginationService.currentItem, this.paginationService.nbPerPage);
       this.deezerService.responseAlbum = await firstValueFrom(obs$);
       this.deezerService.responseArtist = null;
       this.deezerService.responseTrack = null;
-      this.paginationService.nbPages = this.deezerService.responseAlbum.total/this.paginationService.nbPerPage;
+      this.paginationService.nbPages = Math.ceil(this.deezerService.responseAlbum.total/this.paginationService.nbPerPage);
       console.warn(this.deezerService.responseAlbum);
     }
   }

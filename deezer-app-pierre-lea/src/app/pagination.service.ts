@@ -7,7 +7,7 @@ import { DeezerService } from "./deezer.service";
 })
 export class PaginationService {
   public nbPages: number = 0;
-  public nbPerPage: number = 10;
+  public nbPerPage: number = 6;
   public currentPage: number = 0;
   public currentItem: number = 0;
 

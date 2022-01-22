@@ -2,13 +2,13 @@
   <div *ngIf="deezerService.responseArtist.data.length > 0; else noArtist" class="card w-50 m-auto">
     <ul class="list-group list-group-flush">
       <li *ngFor="let item of deezerService.responseArtist.data" class="list-group-item">
-        <div class="row">
+        <div class="row align-items-center">
           <div class="col-md-2">
             <img class="rounded-circle" src="{{ item.picture_small }}" alt="Photo"/>
           </div>
           <div class="col">
-            <div class="row">{{ item.name }}</div>
-            <div class="row small text-muted">{{ item.nb_fan | number }} fans</div>
+            <div>{{ item.name }}</div>
+            <div class="small text-muted">{{ item.nb_fan | number }} fans</div>
           </div>
         </div>
       </li>
@@ -20,17 +20,24 @@
   </ng-template>
 </div>
 
-<div *ngIf="deezerService.responseTrack">
+<div *ngIf="deezerService.responseTrack" id="track-list">
   <div *ngIf="deezerService.responseTrack.data.length > 0; else noTrack" class="card w-50 m-auto">
     <ul class="list-group list-group-flush">
-      <li *ngFor="let item of deezerService.responseTrack.data " class="list-group-item">
-        <div class="row">
+      <li *ngFor="let item of deezerService.responseTrack.data " (click)="triggerAudio($event)" class="list-group-item">
+        <div class="row align-items-center">
           <div class="col-md-2">
             <img src="{{ item.album.cover_small }}" alt="Couverture"/>
           </div>
-          <div class="col">
-            <div class="row">{{ item.title }}</div>
-            <div class="row small text-muted">{{ item.artist.name }}</div>
+          <div class="col-md-6">
+            <div>{{ item.title }}</div>
+            <div class="small text-muted">{{ item.artist.name }}</div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <audio (play)="onPlay($event)" controls src="{{ item.preview }}">
+                Votre navigateur ne supporte pas l'élément <code>audio</code>.
+              </audio>
+            </div>
           </div>
         </div>
       </li>
@@ -46,13 +53,13 @@
   <div *ngIf="deezerService.responseAlbum.data.length > 0; else noAlbum" class="card w-50 m-auto">
     <ul class="list-group list-group-flush">
       <li *ngFor="let item of deezerService.responseAlbum.data" class="list-group-item">
-        <div class="row">
+        <div class="row align-items-center">
           <div class="col-md-2">
             <img src="{{ item.cover_small }}" alt="Couverture"/>
           </div>
           <div class="col">
-            <div class="row">{{ item.title }}</div>
-            <div class="row small text-muted">{{ item.artist.name }}</div>
+            <div>{{ item.title }}</div>
+            <div class="small text-muted">{{ item.artist.name }}</div>
           </div>
         </div>
       </li>
