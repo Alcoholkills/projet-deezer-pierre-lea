@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FavoriteslistService} from "../favoriteslist.service";
 
 @Component({
   selector: 'app-favorites',
@@ -8,12 +9,11 @@ import { Component, OnInit } from '@angular/core';
 
 // TODO faire une liste de favoris
 // Faire des services par categories : un album
-export class FavoritesComponent implements OnInit {
-  public range = [...Array(10).keys()];
+export class FavoritesComponent implements OnInit{
 
-  constructor() { }
+  constructor(public favoriteslistService: FavoriteslistService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    console.log(this.favoriteslistService.favAlbums[0].get("Name"))
   }
-
 }

@@ -1,15 +1,38 @@
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">Album</th>
-    <th scope="col">Artist</th>
-    <th scope="col">Track</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let n of range; index as i"></tr>
-  <td>
-
-  </td>
-  </tbody>
-</table>
+  <div class="row align-items-center w-100 m-auto">
+    <div class="col-md-4">
+      <table class="table table-striped">
+        <thead>
+        <th scope="col">Album</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let album of favoriteslistService.favAlbums">
+          <td>{{ album.get("Name") }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <table class="table table-striped">
+        <thead>
+        <th scope="col">Artistes</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let album of favoriteslistService.favArtists">
+          <td>{{ album.get("Name") }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <table class="table table-striped">
+        <thead>
+        <th scope="col">Tracks</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let album of favoriteslistService.favTracks">
+          <td>{{ album.get("Name") }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

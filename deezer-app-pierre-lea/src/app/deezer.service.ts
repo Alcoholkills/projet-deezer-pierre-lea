@@ -7,6 +7,7 @@ import { HttpClient } from "@angular/common/http";
 export class DeezerService {
 
   private baseUrl: string = "http://localhost:8080/http://api.deezer.com/";
+  // private baseUrl: string = "http://localhost:4200/https://api.deezer.com/";
   public category: string = "artist";
   public search: string = "";
   public responseArtist: any;
