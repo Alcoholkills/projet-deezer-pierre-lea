@@ -11,6 +11,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from './home/home.component';
+import { ArtistComponent } from './artist/artist.component';
+import { NgbCarouselModule } from "@ng-bootstrap/ng-bootstrap";
 
 registerLocaleData(localeFr);
 
@@ -19,13 +21,15 @@ registerLocaleData(localeFr);
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    ArtistComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule
+      BrowserModule,
+      AppRoutingModule,
+      HttpClientModule,
+      ReactiveFormsModule,
+      NgbCarouselModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' }

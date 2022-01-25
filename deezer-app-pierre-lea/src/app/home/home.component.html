@@ -1,7 +1,7 @@
 <div *ngIf="deezerService.responseArtist">
   <div *ngIf="deezerService.responseArtist.data.length > 0; else noArtist" class="card w-50 m-auto">
     <ul class="list-group list-group-flush">
-      <li *ngFor="let item of deezerService.responseArtist.data" class="list-group-item">
+      <li *ngFor="let item of deezerService.responseArtist.data" (click)="routeToArtist(item.id)" class="list-group-item">
         <div class="row align-items-center">
           <div class="col-md-2">
             <img class="rounded-circle" src="{{ item.picture_small }}" alt="Photo"/>
@@ -20,10 +20,10 @@
   </ng-template>
 </div>
 
-<div *ngIf="deezerService.responseTrack" id="track-list">
+<div *ngIf="deezerService.responseTrack">
   <div *ngIf="deezerService.responseTrack.data.length > 0; else noTrack" class="card w-50 m-auto">
     <ul class="list-group list-group-flush">
-      <li *ngFor="let item of deezerService.responseTrack.data " (click)="triggerAudio($event)" class="list-group-item">
+      <li *ngFor="let item of deezerService.responseTrack.data " (click)="audioService.triggerAudio($event)" class="list-group-item">
         <div class="row align-items-center">
           <div class="col-md-2">
             <img src="{{ item.album.cover_small }}" alt="Couverture"/>
@@ -34,7 +34,7 @@
           </div>
           <div class="col-md-4">
             <div class="row">
-              <audio (play)="onPlay($event)" controls src="{{ item.preview }}">
+              <audio (play)="audioService.onPlay($event)" controls src="{{ item.preview }}">
                 Votre navigateur ne supporte pas l'élément <code>audio</code>.
               </audio>
             </div>

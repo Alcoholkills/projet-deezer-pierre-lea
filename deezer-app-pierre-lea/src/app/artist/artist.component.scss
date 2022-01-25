@@ -1,3 +1,12 @@
+.btn-burgundy {
+  color: #ffffff;
+  background-color: #990000;
+}
+
+.btn-burgundy:hover {
+  background-color: #800000;
+}
+
 @media only screen and (max-width: 1000px) {
   li {
     text-align: center;
