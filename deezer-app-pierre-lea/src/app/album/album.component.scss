@@ -7,13 +7,17 @@
   background-color: #800000;
 }
 
+.text-burgundy {
+  color: #990000;
+}
+
 @media only screen and (max-width: 1000px) {
   li {
     text-align: center;
   }
 }
 
-li:hover, .album:hover {
+li:hover {
   cursor: pointer;
   background-color: #fff6e6;
 }

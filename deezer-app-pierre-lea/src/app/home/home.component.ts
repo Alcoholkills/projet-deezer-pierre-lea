@@ -20,4 +20,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['artist', id]);
   }
 
+  public routeToAlbum(id: number) {
+    this.router.navigate(['album', id]);
+  }
+
 }

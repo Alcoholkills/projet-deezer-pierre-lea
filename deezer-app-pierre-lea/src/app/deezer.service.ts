@@ -15,6 +15,11 @@ export class DeezerService {
 
   constructor(private http: HttpClient) { }
 
+  public getAlbum(id: number) {
+    const url: string = this.baseUrl + "/album/" + id;
+    return this.http.get(url);
+  }
+
   public getArtistTop5(id: number) {
     const url: string = this.baseUrl + "/artist/" + id + "/top";
     return this.http.get(url);

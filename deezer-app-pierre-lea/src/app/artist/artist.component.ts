@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { DeezerService } from "../deezer.service";
 import { firstValueFrom, Observable } from "rxjs";
 import { Location } from "@angular/common";
@@ -21,7 +21,7 @@ export class ArtistComponent implements OnInit {
   public nbAlbumsPerCarouselItem: number = 6;
   public nbCarouselItems: number = 0;
 
-  constructor(private config: NgbCarouselConfig, private location: Location, private route: ActivatedRoute, private deezerService: DeezerService, public audioService: AudioService) {
+  constructor(private config: NgbCarouselConfig, private location: Location, private route: ActivatedRoute, private router: Router, private deezerService: DeezerService, public audioService: AudioService) {
     this.id = +this.route.snapshot.paramMap.get('id')!;
     this.config.interval = 0;
     this.config.wrap = false;
@@ -34,6 +34,10 @@ export class ArtistComponent implements OnInit {
 
   public counter(nb: number) {
     return new Array(nb);
+  }
+
+  public routeToAlbum(id: number) {
+    this.router.navigate(['album', id]);
   }
 
   async ngOnInit() {

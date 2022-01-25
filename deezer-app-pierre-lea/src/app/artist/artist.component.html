@@ -1,13 +1,13 @@
 <button type="button" (click)="back()" class="btn btn-burgundy">Retour</button>
 
 <div class="w-75 m-auto">
-  <div class="text-center">
+  <div *ngIf="artist" class="text-center">
     <img class="rounded-circle mb-3" src="{{ artist.picture_medium }}" alt="Photo"/>
     <div>{{ artist.name }}</div>
     <div class="small text-muted">{{ artist.nb_fan }} fans</div>
   </div>
 
-  <div *ngIf="top.data.length > 0">
+  <div *ngIf="top && top.data.length > 0">
     <h1 class="mt-5 mb-4">Top 5 Titres</h1>
 
     <div class="card">
@@ -34,14 +34,14 @@
     </div>
   </div>
 
-  <div *ngIf="albums.data.length > 0">
+  <div *ngIf="albums && albums.data.length > 0">
     <h1 class="mt-5 mb-4">Albums</h1>
 
-    <ngb-carousel id="carouselAlbums">
+    <ngb-carousel>
       <ng-template *ngFor="let item of counter(nbCarouselItems); let i = index" ngbSlide>
         <div class="row">
-          <div *ngFor="let div of counter(nbAlbumsPerCarouselItem); let j = index" class="col-md-2 mb-3">
-            <div *ngIf="albums.data[i*nbAlbumsPerCarouselItem+j]" class="text-center">
+          <div *ngFor="let div of counter(nbAlbumsPerCarouselItem); let j = index" (click)="routeToAlbum(albums.data[i*nbAlbumsPerCarouselItem+j].id)" class="col-md-2 mb-3">
+            <div *ngIf="albums.data[i*nbAlbumsPerCarouselItem+j]" class="album text-center">
               <img class="card-img-top" src="{{ albums.data[i*nbAlbumsPerCarouselItem+j].cover_medium }}" alt="Couverture"/>
               <div>{{ albums.data[i*nbAlbumsPerCarouselItem+j].title }}</div>
               <div class="small text-muted">{{ albums.data[i*nbAlbumsPerCarouselItem+j].record_type.toUpperCase() }}</div>

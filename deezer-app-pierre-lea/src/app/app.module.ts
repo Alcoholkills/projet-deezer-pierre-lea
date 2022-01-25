@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from './home/home.component';
 import { ArtistComponent } from './artist/artist.component';
 import { NgbCarouselModule } from "@ng-bootstrap/ng-bootstrap";
+import { AlbumComponent } from './album/album.component';
 
 registerLocaleData(localeFr);
 
@@ -22,7 +23,8 @@ registerLocaleData(localeFr);
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    ArtistComponent
+    ArtistComponent,
+    AlbumComponent
   ],
   imports: [
       BrowserModule,
