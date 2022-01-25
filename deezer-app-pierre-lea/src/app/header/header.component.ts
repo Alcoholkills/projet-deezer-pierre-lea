@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { DeezerService } from "../deezer.service";
 import { firstValueFrom, Observable } from "rxjs";
 import { PaginationService } from "../pagination.service";
+import { AppRoutingModule} from "../app-routing.module";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
