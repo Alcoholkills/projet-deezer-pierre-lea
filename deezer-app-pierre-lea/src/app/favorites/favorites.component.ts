@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FavoriteslistService} from "../favoriteslist.service";
+import {Artist} from "../artist/artist.component";
+import {Album} from "../album/album.component";
+import {Track} from "../track/track.component";
 
 @Component({
   selector: 'app-favorites',
@@ -14,6 +17,8 @@ export class FavoritesComponent implements OnInit{
   constructor(public favoriteslistService: FavoriteslistService) {}
 
   public ngOnInit(): void {
-    console.log(this.favoriteslistService.favAlbums[0].get("Name"))
+    console.log(this.favoriteslistService.favAlbums);
+    console.log(this.favoriteslistService.favArtists);
+    console.log(this.favoriteslistService.favTracks);
   }
 }

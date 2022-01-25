@@ -5,8 +5,8 @@
         <th scope="col">Album</th>
         </thead>
         <tbody>
-        <tr *ngFor="let album of favoriteslistService.favAlbums">
-          <td>{{ album.get("Name") }}</td>
+        <tr *ngFor="let album in favoriteslistService.favAlbums">
+          <td>{{ album.name() }}</td>
         </tr>
         </tbody>
       </table>
@@ -17,8 +17,8 @@
         <th scope="col">Artistes</th>
         </thead>
         <tbody>
-        <tr *ngFor="let album of favoriteslistService.favArtists">
-          <td>{{ album.get("Name") }}</td>
+        <tr *ngFor="let artist in favoriteslistService.favArtists">
+          <td>{{ artist.name() }}</td>
         </tr>
         </tbody>
       </table>
@@ -29,8 +29,8 @@
         <th scope="col">Tracks</th>
         </thead>
         <tbody>
-        <tr *ngFor="let album of favoriteslistService.favTracks">
-          <td>{{ album.get("Name") }}</td>
+        <tr *ngFor="let track in favoriteslistService.favTracks">
+          <td>{{ track.name() }}</td>
         </tr>
         </tbody>
       </table>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DeezerService } from "../deezer.service";
 import { PaginationService } from "../pagination.service";
 import {FavoriteslistService} from "../favoriteslist.service";
+import {Album} from "../album/album.component";
+import {Artist} from "../artist/artist.component";
+import {Track} from "../track/track.component";
 
 @Component({
   selector: 'app-home',
@@ -12,19 +15,43 @@ export class HomeComponent implements OnInit {
   public AlbumBool = true;
   public ArtistBool = true;
   public TrackBool = true;
+  public currentAlbumList: Array<Album>;
+  public currentArtistList: Array<Artist>;
+  public currentTrackList: Array<Track>;
   public favImage = "assets/fav.svg";
   public noFavImage = "assets/not-fav.svg";
-  public tempImage = "assets/not-fav.svg";
 
   constructor(public deezerService: DeezerService,
               public paginationService: PaginationService,
               public favoriteslist: FavoriteslistService) {
-    this.deezerAlbumData();
-    console.log("GUACAMOLE");
-    console.log(deezerService.responseAlbum.data);
+    this.currentAlbumList = [];
+    if (deezerService.responseAlbum) {
+      // @ts-ignore
+      for (let item: any in deezerService.responseAlbum.data) {
+        // @ts-ignore
+        this.currentAlbumList.push(new Album(item.cover_small, item.title, item.artist.name));
+      }
+    }
+    this.currentArtistList = [];
+    if (deezerService.responseArtist) {
+      // @ts-ignore
+      for (let item: any in deezerService.responseArtist.data) {
+        // @ts-ignore
+        this.currentArtistList.push(new Artist(item.picture_small, item.name));
+      }
+    }
+    this.currentTrackList = [];
+    if (deezerService.responseTrack) {
+      // @ts-ignore
+      for (let item: any in deezerService.responseTrack.data) {
+        // @ts-ignore
+        this.currentTrackList.push(new Track(item.album.cover_small, item.title, item.artist.name))
+      }
+    }
   }
 
   ngOnInit(): void {
+
   }
 
   public triggerAudio(e: any) {
@@ -51,40 +78,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public homeAddAlbum(item: any): void {
+  public AlbumFav(item: any): void {
     this.favoriteslist.addAlbum(item.cover_small, item.title, item.artist.name);
-    if (this.AlbumBool) {
-      this.tempImage = this.favImage;
-    } else {
-      this.tempImage = this.noFavImage;
-    }
     this.AlbumBool = !this.AlbumBool;
   }
 
-  public homeAddArtist(item: any): void {
+  public ArtistFav(item: any): void {
     this.favoriteslist.addArtist(item.picture_small, item.name);
-    if (this.ArtistBool) {
-      this.tempImage = this.favImage;
-    } else {
-      this.tempImage = this.noFavImage;
-    }
     this.ArtistBool = !this.ArtistBool;
   }
 
-  public homeAddTrack(item: any): void {
+  public TrackFav(item: any): void {
     this.favoriteslist.addTrack(item.album.cover_small, item.title, item.artist.name)
-    if (this.TrackBool) {
-      this.tempImage = this.favImage;
-    } else {
-      this.tempImage = this.noFavImage;
-    }
     this.TrackBool = !this.TrackBool;
   }
 
-  public deezerAlbumData(): void {
-    let item: any;
-    for (item in this.deezerService.responseAlbum.data){
-      item.set("bool", false);
-    }
-  }
 }
