@@ -4,6 +4,9 @@
       <img src="assets/logo.svg" alt="Logo" width="50" height="50" class="d-inline-block align-middle">
       Hear It
     </a>
+    <button [routerLink]="'favorites'" class="btn btn-default">
+      <img src="assets/fav.svg" alt="favorites" width="40" height="40" class="d-inline-block align-middle">
+    </button>
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="d-flex">
       <select class="form-select me-2" id="category" formControlName="category">
         <option value="artist">Artiste</option>

@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from './home/home.component';
+import {FavoritesComponent} from "./favorites/favorites.component";
 import { ArtistComponent } from './artist/artist.component';
 import { NgbCarouselModule } from "@ng-bootstrap/ng-bootstrap";
 import { AlbumComponent } from './album/album.component';
@@ -23,6 +24,7 @@ registerLocaleData(localeFr);
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    FavoritesComponent,
     ArtistComponent,
     AlbumComponent
   ],

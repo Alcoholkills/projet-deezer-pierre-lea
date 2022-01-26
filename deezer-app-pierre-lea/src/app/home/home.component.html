@@ -1,5 +1,5 @@
 <div *ngIf="deezerService.responseArtist">
-  <div *ngIf="deezerService.responseArtist.data.length > 0; else noArtist" class="card w-50 m-auto">
+  <div *ngIf="deezerService.responseArtist.data.length > 0; else noArtist" class="card w-75 m-auto">
     <ul class="list-group list-group-flush">
       <li *ngFor="let item of deezerService.responseArtist.data" (click)="routeToArtist(item.id)" class="list-group-item">
         <div class="row align-items-center">
@@ -9,6 +9,9 @@
           <div class="col">
             <div>{{ item.name }}</div>
             <div class="small text-muted">{{ item.nb_fan | number }} fans</div>
+          </div>
+          <div class="col-md-1">
+            <img (click)="manageArtistFavorite(item)" src="{{ this.favoriteslist.containsArtist(item.name) ? this.favImage : this.noFavImage }}" alt="not favorite" height="40" width="40">
           </div>
         </div>
       </li>
@@ -21,23 +24,26 @@
 </div>
 
 <div *ngIf="deezerService.responseTrack">
-  <div *ngIf="deezerService.responseTrack.data.length > 0; else noTrack" class="card w-50 m-auto">
+  <div *ngIf="deezerService.responseTrack.data.length > 0; else noTrack" class="card w-75 m-auto">
     <ul class="list-group list-group-flush">
       <li *ngFor="let item of deezerService.responseTrack.data " (click)="audioService.triggerAudio($event)" class="list-group-item">
         <div class="row align-items-center">
           <div class="col-md-2">
             <img src="{{ item.album.cover_small }}" alt="Couverture"/>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div>{{ item.title }}</div>
             <div class="small text-muted">{{ item.artist.name }}</div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="row">
               <audio (play)="audioService.onPlay($event)" controls src="{{ item.preview }}">
                 Votre navigateur ne supporte pas l'élément <code>audio</code>.
               </audio>
             </div>
+          </div>
+          <div class="col-md-1">
+              <img (click)="manageTrackFavorite(item)" src="{{ this.favoriteslist.containsTrack(item.title) ? this.favImage : this.noFavImage }}" alt="not favorite" height="40" width="40">
           </div>
         </div>
       </li>
@@ -50,7 +56,7 @@
 </div>
 
 <div *ngIf="deezerService.responseAlbum">
-  <div *ngIf="deezerService.responseAlbum.data.length > 0; else noAlbum" class="card w-50 m-auto">
+  <div *ngIf="deezerService.responseAlbum.data.length > 0; else noAlbum" class="card w-75 m-auto">
     <ul class="list-group list-group-flush">
       <li *ngFor="let item of deezerService.responseAlbum.data" (click)="routeToAlbum(item.id)" class="list-group-item">
         <div class="row align-items-center">
@@ -60,6 +66,9 @@
           <div class="col">
             <div>{{ item.title }}</div>
             <div class="small text-muted">{{ item.artist.name }}</div>
+          </div>
+          <div class="col-md-1">
+            <img (click)="manageAlbumFavorite(item)" src="{{ this.favoriteslist.containsAlbum(item.title) ? this.favImage : this.noFavImage }}" alt="not favorite" height="40" width="40">
           </div>
         </div>
       </li>
