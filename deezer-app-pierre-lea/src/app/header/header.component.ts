@@ -3,8 +3,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { DeezerService } from "../deezer.service";
 import { firstValueFrom, Observable } from "rxjs";
 import { PaginationService } from "../pagination.service";
-import { AppRoutingModule} from "../app-routing.module";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -18,7 +17,7 @@ export class HeaderComponent implements OnInit {
     search: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private deezerService: DeezerService, private paginationService: PaginationService) { }
+  constructor(private router: Router, private fb: FormBuilder, private deezerService: DeezerService, private paginationService: PaginationService) { }
 
   ngOnInit(): void {
   }
@@ -35,21 +34,20 @@ export class HeaderComponent implements OnInit {
       this.deezerService.responseAlbum = null;
       this.deezerService.responseTrack = null;
       this.paginationService.nbPages = Math.ceil(this.deezerService.responseArtist.total/this.paginationService.nbPerPage);
-      console.warn(this.deezerService.responseArtist);
     } else if (this.deezerService.category === "track") {
       const obs$: Observable<any> = this.deezerService.getTracksList(this.deezerService.search, this.paginationService.currentItem, this.paginationService.nbPerPage);
       this.deezerService.responseTrack = await firstValueFrom(obs$);
       this.deezerService.responseArtist = null;
       this.deezerService.responseAlbum = null;
       this.paginationService.nbPages = Math.ceil(this.deezerService.responseTrack.total/this.paginationService.nbPerPage);
-      console.warn(this.deezerService.responseTrack);
     } else {
       const obs$: Observable<any> = this.deezerService.getAlbumsList(this.deezerService.search, this.paginationService.currentItem, this.paginationService.nbPerPage);
       this.deezerService.responseAlbum = await firstValueFrom(obs$);
       this.deezerService.responseArtist = null;
       this.deezerService.responseTrack = null;
       this.paginationService.nbPages = Math.ceil(this.deezerService.responseAlbum.total/this.paginationService.nbPerPage);
-      console.warn(this.deezerService.responseAlbum);
     }
+
+    this.router.navigate(['home']);
   }
 }

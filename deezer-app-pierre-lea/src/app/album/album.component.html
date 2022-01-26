@@ -1,0 +1,43 @@
+<button type="button" (click)="back()" class="btn btn-burgundy">Retour</button>
+
+<div *ngIf="album" class="w-75 m-auto">
+  <div class="text-center">
+    <img class="mb-3" src="{{ album.cover_medium }}" alt="Couverture"/>
+    <div>{{ album.title }}</div>
+    <div class="small">Par {{ album.artist.name }}</div>
+    <div class="small text-muted">{{ album.record_type.toUpperCase() }}</div>
+    <div class="small text-muted">{{ album.release_date | date }}</div>
+    <div class="small text-burgundy">
+      <span *ngFor="let genre of album.genres.data; last as isLast">
+        <i>{{ genre.name }}</i>
+        <i *ngIf="!isLast">, </i>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="album.tracks.data.length > 0">
+    <h1 class="mt-5 mb-4">Titres</h1>
+
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let track of album.tracks.data; let i = index" (click)="audioService.triggerAudio($event)" class="list-group-item">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <img src="{{ album.cover_small }}" alt="Couverture"/>
+            </div>
+            <div class="col-md-6">
+              <div>{{ i+1 }}. {{ track.title }}</div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <audio (play)="audioService.onPlay($event)" controls src="{{ track.preview }}">
+                  Votre navigateur ne supporte pas l'élément <code>audio</code>.
+                </audio>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

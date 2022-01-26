@@ -1,0 +1,55 @@
+<button type="button" (click)="back()" class="btn btn-burgundy">Retour</button>
+
+<div class="w-75 m-auto">
+  <div *ngIf="artist" class="text-center">
+    <img class="rounded-circle mb-3" src="{{ artist.picture_medium }}" alt="Photo"/>
+    <div>{{ artist.name }}</div>
+    <div class="small text-muted">{{ artist.nb_fan }} fans</div>
+  </div>
+
+  <div *ngIf="top && top.data.length > 0">
+    <h1 class="mt-5 mb-4">Top 5 Titres</h1>
+
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let track of top.data" (click)="audioService.triggerAudio($event)" class="list-group-item">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <img src="{{ track.album.cover_small }}" alt="Couverture"/>
+            </div>
+            <div class="col-md-6">
+              <div>{{ track.title }}</div>
+              <div class="small text-muted">{{ track.album.title }}</div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <audio (play)="audioService.onPlay($event)" controls src="{{ track.preview }}">
+                  Votre navigateur ne supporte pas l'élément <code>audio</code>.
+                </audio>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="albums && albums.data.length > 0">
+    <h1 class="mt-5 mb-4">Albums</h1>
+
+    <ngb-carousel>
+      <ng-template *ngFor="let item of counter(nbCarouselItems); let i = index" ngbSlide>
+        <div class="row">
+          <div *ngFor="let div of counter(nbAlbumsPerCarouselItem); let j = index" (click)="routeToAlbum(albums.data[i*nbAlbumsPerCarouselItem+j].id)" class="col-md-2 mb-3">
+            <div *ngIf="albums.data[i*nbAlbumsPerCarouselItem+j]" class="album text-center">
+              <img class="card-img-top" src="{{ albums.data[i*nbAlbumsPerCarouselItem+j].cover_medium }}" alt="Couverture"/>
+              <div>{{ albums.data[i*nbAlbumsPerCarouselItem+j].title }}</div>
+              <div class="small text-muted">{{ albums.data[i*nbAlbumsPerCarouselItem+j].record_type.toUpperCase() }}</div>
+              <div class="small text-muted">{{ albums.data[i*nbAlbumsPerCarouselItem+j].release_date | date }}</div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+</div>
