@@ -1,17 +1,17 @@
 <div *ngIf="deezerService.responseArtist">
   <div *ngIf="deezerService.responseArtist.data.length > 0; else noArtist" class="card w-75 m-auto">
     <ul class="list-group list-group-flush">
-      <li *ngFor="let item of deezerService.responseArtist.data" class="list-group-item">
+      <li *ngFor="let artist of this.currentArtistList" class="list-group-item">
         <div class="row align-items-center">
           <div class="col-md-2">
-            <img class="rounded-circle" src="{{ item.picture_small }}" alt="Photo"/>
+            <img class="rounded-circle" src="{{ artist.image }}" alt="Photo"/>
           </div>
           <div class="col">
-            <div>{{ item.name }}</div>
-            <div class="small text-muted">{{ item.nb_fan | number }} fans</div>
+            <div>{{ artist.name }}</div>
+            <div class="small text-muted">{{ artist.fanCount | number }} fans</div>
           </div>
           <div class="col-md-1">
-            <img (click)="ArtistFav(item)" src="{{ this.noFavImage }}" alt="not favorite" height="40" width="40">
+            <img (click)="ArtistFav(artist)" src="{{ artist.isFav ? this.favImage : this.noFavImage }}" alt="status favorite" height="40" width="40">
           </div>
         </div>
       </li>
@@ -20,6 +20,9 @@
 
   <ng-template #noArtist>
     <p class="lead">Oups... Aucun artiste trouvé.</p>
+  </ng-template>
+  <ng-template #notFav>
+
   </ng-template>
 </div>
 

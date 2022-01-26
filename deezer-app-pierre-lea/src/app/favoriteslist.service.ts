@@ -17,28 +17,52 @@ export class FavoriteslistService {
     this.favTracks = [];
   }
 
-  public addArtist(artistImage: string, artistName: string) {
-    this.favArtists.push(new Artist(artistImage, artistName));
+  public addArtistExplicit(artistImage: string, artistName: string, fanCount: number) {
+    this.addArtist(new Artist(artistImage, artistName, fanCount));
   }
 
-  public removeArtist(artistImage: string, artistName: string) {
-    this.favArtists.splice(this.favArtists.indexOf(new Artist(artistImage, artistName)), 1);
+  public addArtist(artist: Artist){
+    this.favArtists.push(artist);
   }
 
-  public addAlbum(albumImage: string, albumName: string, artistName: string) {
-    this.favAlbums.push(new Album(albumImage, albumName, artistName));
+  public removeArtistExplicit(artistImage: string, artistName: string, fanCount: number) {
+    this.removeArtist(new Artist(artistImage, artistName, fanCount));
   }
 
-  public removeAlbum(albumImage: string, albumName: string, artistName: string) {
-    this.favAlbums.splice(this.favAlbums.indexOf(new Album(albumImage, albumName, artistName)), 1);
+  public removeArtist(artist: Artist) {
+    this.favArtists.splice(this.favArtists.indexOf(artist), 1)
   }
 
-  public addTrack(albumImage: string, trackname: string, artistName: string) {
-    this.favTracks.push(new Track(albumImage, trackname, artistName));
+  public addAlbumExplicit(albumImage: string, albumName: string, artistName: string) {
+    this.addAlbum(new Album(albumImage, albumName, artistName));
   }
 
-  public removeTrack(albumImage: string, trackname: string, artistName: string) {
-    this.favTracks.splice(this.favTracks.indexOf(new Track(albumImage, trackname, artistName)), 1);
+  public addAlbum(album: Album) {
+    this.favAlbums.push(album);
+  }
+
+  public removeAlbumExplicit(albumImage: string, albumName: string, artistName: string) {
+    this.removeAlbum(new Album(albumImage, albumName, artistName));
+  }
+
+  public removeAlbum(album: Album) {
+    this.favAlbums.splice(this.favAlbums.indexOf(album), 1);
+  }
+
+  public addTrackExplicit(albumImage: string, trackname: string, artistName: string) {
+    this.addTrack(new Track(albumImage, trackname, artistName));
+  }
+
+  public addTrack(track: Track) {
+    this.favTracks.push(track);
+  }
+
+  public removeTrackExplicit(albumImage: string, trackname: string, artistName: string) {
+    this.removeTrack(new Track(albumImage, trackname, artistName));
+  }
+
+  public removeTrack(track: Track) {
+    this.favTracks.slice(this.favTracks.indexOf(track), 1);
   }
 
 }

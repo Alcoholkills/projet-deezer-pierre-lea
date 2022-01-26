@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
       // @ts-ignore
       for (let item: any in deezerService.responseArtist.data) {
         // @ts-ignore
-        this.currentArtistList.push(new Artist(item.picture_small, item.name));
+        this.currentArtistList.push(new Artist(item.picture_small, item.name, item.nb_fan));
       }
     }
     this.currentTrackList = [];
@@ -48,10 +48,15 @@ export class HomeComponent implements OnInit {
         this.currentTrackList.push(new Track(item.album.cover_small, item.title, item.artist.name))
       }
     }
+    console.log(this.currentArtistList);
+    console.log(this.currentTrackList);
+    console.log(this.currentAlbumList);
   }
 
   ngOnInit(): void {
-
+    console.log(this.currentArtistList);
+    console.log(this.currentTrackList);
+    console.log(this.currentAlbumList);
   }
 
   public triggerAudio(e: any) {
@@ -78,18 +83,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public AlbumFav(item: any): void {
-    this.favoriteslist.addAlbum(item.cover_small, item.title, item.artist.name);
-    this.AlbumBool = !this.AlbumBool;
+  public AlbumFav(item: Album): void {
+    item.isFav = true;
+    this.favoriteslist.addAlbum(item);
   }
 
-  public ArtistFav(item: any): void {
-    this.favoriteslist.addArtist(item.picture_small, item.name);
+  public ArtistFav(item: Artist): void {
+    this.favoriteslist.addArtist(item);
     this.ArtistBool = !this.ArtistBool;
   }
 
-  public TrackFav(item: any): void {
-    this.favoriteslist.addTrack(item.album.cover_small, item.title, item.artist.name)
+  public TrackFav(item: Track): void {
+    this.favoriteslist.addTrack(item)
     this.TrackBool = !this.TrackBool;
   }
 
