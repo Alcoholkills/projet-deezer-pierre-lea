@@ -1,7 +1,7 @@
 <div *ngIf="deezerService.responseArtist">
   <div *ngIf="deezerService.responseArtist.data.length > 0; else noArtist" class="card w-75 m-auto">
     <ul class="list-group list-group-flush">
-      <li *ngFor="let item of deezerService.responseArtist.data" (click)="routeToArtist(item.id)" class="list-group-item">
+      <li *ngFor="let item of deezerService.responseArtist.data" (click)="routeToArtist($event, item.id)" class="list-group-item">
         <div class="row align-items-center">
           <div class="col-md-2">
             <img class="rounded-circle" src="{{ item.picture_small }}" alt="Photo"/>
@@ -11,7 +11,7 @@
             <div class="small text-muted">{{ item.nb_fan | number }} fans</div>
           </div>
           <div class="col-md-1">
-            <img (click)="manageArtistFavorite(item)" src="{{ this.favoriteslist.containsArtist(item.name) ? this.favImage : this.noFavImage }}" alt="not favorite" height="40" width="40">
+            <img class="favorite" (click)="favoriteslist.manageArtistFavorite(item)" src="{{ this.favoriteslist.containsArtist(item.name) ? this.favImage : this.noFavImage }}" alt="Statut favoris" title="Ajouter/Retirer des favoris" height="40" width="40">
           </div>
         </div>
       </li>
@@ -43,7 +43,7 @@
             </div>
           </div>
           <div class="col-md-1">
-              <img (click)="manageTrackFavorite(item)" src="{{ this.favoriteslist.containsTrack(item.title) ? this.favImage : this.noFavImage }}" alt="not favorite" height="40" width="40">
+              <img class="favorite" (click)="favoriteslist.manageTrackFavorite(item)" src="{{ this.favoriteslist.containsTrack(item.title) ? this.favImage : this.noFavImage }}" alt="Statut favoris" title="Ajouter/Retirer des favoris" height="40" width="40">
           </div>
         </div>
       </li>
@@ -58,7 +58,7 @@
 <div *ngIf="deezerService.responseAlbum">
   <div *ngIf="deezerService.responseAlbum.data.length > 0; else noAlbum" class="card w-75 m-auto">
     <ul class="list-group list-group-flush">
-      <li *ngFor="let item of deezerService.responseAlbum.data" (click)="routeToAlbum(item.id)" class="list-group-item">
+      <li *ngFor="let item of deezerService.responseAlbum.data" (click)="routeToAlbum($event, item.id)" class="list-group-item">
         <div class="row align-items-center">
           <div class="col-md-2">
             <img src="{{ item.cover_small }}" alt="Couverture"/>
@@ -68,7 +68,7 @@
             <div class="small text-muted">{{ item.artist.name }}</div>
           </div>
           <div class="col-md-1">
-            <img (click)="manageAlbumFavorite(item)" src="{{ this.favoriteslist.containsAlbum(item.title) ? this.favImage : this.noFavImage }}" alt="not favorite" height="40" width="40">
+            <img class="favorite" (click)="favoriteslist.manageAlbumFavorite(item)" src="{{ this.favoriteslist.containsAlbum(item.title) ? this.favImage : this.noFavImage }}" alt="Statut favoris" title="Ajouter/Retirer des favoris" height="40" width="40">
           </div>
         </div>
       </li>

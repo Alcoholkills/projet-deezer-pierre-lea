@@ -1,38 +1,68 @@
-  <div class="row align-items-center w-100 m-auto">
-    <div class="col-md-4">
-      <table class="table table-striped">
-        <thead>
-        <th scope="col">Album</th>
-        </thead>
-        <tbody>
-        <tr *ngFor="let album of favoriteslistService.favAlbums">
-          <td>{{ album.get("Name") }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-4">
-      <table class="table table-striped">
-        <thead>
-        <th scope="col">Artistes</th>
-        </thead>
-        <tbody>
-        <tr *ngFor="let album of favoriteslistService.favArtists">
-          <td>{{ album.get("Name") }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-4">
-      <table class="table table-striped">
-        <thead>
-        <th scope="col">Tracks</th>
-        </thead>
-        <tbody>
-        <tr *ngFor="let album of favoriteslistService.favTracks">
-          <td>{{ album.get("Name") }}</td>
-        </tr>
-        </tbody>
-      </table>
+<button type="button" (click)="back()" class="btn btn-burgundy">Retour</button>
+
+<div class="row mt-5">
+  <div class="col-md-4">
+    <h3 class="text-center mb-3">Albums</h3>
+
+    <div *ngIf="favoriteslistService.favAlbums.length > 0" class="card">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let album of favoriteslistService.favAlbums" (click)="routeToAlbum(album.get('ID'))" class="list-group-item">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <img src="{{ album.get('Image') }}" alt="Couverture"/>
+            </div>
+            <div class="col">
+              <div>{{ album.get('Name') }}</div>
+              <div class="small text-muted">{{ album.get('Artist') }}</div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
+  <div class="col-md-4">
+    <h3 class="text-center mb-3">Artistes</h3>
+
+    <div *ngIf="favoriteslistService.favArtists.length > 0" class="card">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let artist of favoriteslistService.favArtists" (click)="routeToArtist(artist.get('ID'))" class="list-group-item">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <img class="rounded-circle" src="{{ artist.get('Image') }}" alt="Photo"/>
+            </div>
+            <div class="col">
+              <div>{{ artist.get('Name') }}</div>
+              <div class="small text-muted">{{ artist.get('Fans') | number }} fans</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3 class="text-center mb-3">Titres</h3>
+
+    <div *ngIf="favoriteslistService.favTracks.length > 0" class="card">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let track of favoriteslistService.favTracks" (click)="audioService.triggerAudio($event)" class="list-group-item">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <img src="{{ track.get('Image') }}" alt="Couverture"/>
+            </div>
+            <div class="col">
+              <div>{{ track.get('Name') }}</div>
+              <div class="small text-muted">{{ track.get('Artist') }}</div>
+            </div>
+            <div class="col-md-2">
+              <div class="row">
+                <audio (play)="audioService.onPlay($event)" controls src="{{ track.get('Preview') }}">
+                  Votre navigateur ne supporte pas l'élément <code>audio</code>.
+                </audio>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

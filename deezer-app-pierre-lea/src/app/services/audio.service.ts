@@ -8,7 +8,7 @@ export class AudioService {
   constructor() { }
 
   public triggerAudio(e: any) {
-    if (e.target.tagName.toLowerCase() !== "audio") {
+    if (e.target.tagName.toLowerCase() !== "audio" && e.target.className !== "favorite") {
       let li = e.target.closest("li");
       let audio = li.querySelector("audio");
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
-import { DeezerService } from "../deezer.service";
+import { DeezerService } from "../services/deezer.service";
 import { firstValueFrom, Observable } from "rxjs";
-import { PaginationService } from "../pagination.service";
+import { PaginationService } from "../services/pagination.service";
 import { Router } from "@angular/router";
 
 @Component({

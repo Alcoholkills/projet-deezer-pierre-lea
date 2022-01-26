@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { DeezerService } from "../deezer.service";
+import { DeezerService } from "../services/deezer.service";
 import { firstValueFrom, Observable } from "rxjs";
 import { Location } from "@angular/common";
-import { AudioService } from "../audio.service";
+import { AudioService } from "../services/audio.service";
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

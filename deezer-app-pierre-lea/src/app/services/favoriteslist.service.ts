@@ -14,8 +14,10 @@ export class FavoriteslistService {
     this.favTracks = [];
   }
 
-  public addArtist(artistImage: string, artistName: string) {
+  public addArtist(id: string, fans: string, artistImage: string, artistName: string) {
     this.favArtists.push(new Map<string,string>([
+      ["ID", id],
+      ["Fans", fans],
       ["Image", artistImage],
       ["Name", artistName]
     ]));
@@ -43,8 +45,17 @@ export class FavoriteslistService {
     return false;
   }
 
-  public addAlbum(albumImage: string, albumName: string, artistName: string) {
+  public manageArtistFavorite(item: any): void {
+    if (this.containsArtist(item.name)) {
+      this.removeArtist(item.name);
+    } else {
+      this.addArtist(item.id, item.nb_fan, item.picture_small, item.name);
+    }
+  }
+
+  public addAlbum(id: string, albumImage: string, albumName: string, artistName: string) {
     this.favAlbums.push(new Map<string,string>([
+      ["ID", id],
       ["Image", albumImage],
       ["Name", albumName],
       ["Artist", artistName]
@@ -71,10 +82,19 @@ export class FavoriteslistService {
     return false;
   }
 
-  public addTrack(albumImage: string, trackname: string, artistName: string) {
+  public manageAlbumFavorite(item: any): void {
+    if (this.containsAlbum(item.title)) {
+      this.removeAlbum(item.title);
+    } else {
+      this.addAlbum(item.id, item.cover_small, item.title, item.artist.name);
+    }
+  }
+
+  public addTrack(albumImage: string, trackname: string, preview: string, artistName: string) {
     this.favTracks.push(new Map<string,string>([
       ["Image", albumImage],
       ["Name", trackname],
+      ["Preview", preview],
       ["Artist", artistName]
     ]));
   }
@@ -97,6 +117,14 @@ export class FavoriteslistService {
       }
     }
     return false;
+  }
+
+  public manageTrackFavorite(item: any): void {
+    if (this.containsTrack(item.title)) {
+      this.removeTrack(item.title);
+    } else {
+      this.addTrack(item.album.cover_small, item.title, item.preview, item.artist.name);
+    }
   }
 
 }

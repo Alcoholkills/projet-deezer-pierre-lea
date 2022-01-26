@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { firstValueFrom, Observable } from "rxjs";
-import { DeezerService } from "../deezer.service";
-import { AudioService } from "../audio.service";
+import { DeezerService } from "../services/deezer.service";
+import { AudioService } from "../services/audio.service";
 import { Location } from "@angular/common";
 
 @Component({
