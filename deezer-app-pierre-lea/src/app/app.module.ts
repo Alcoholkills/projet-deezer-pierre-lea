@@ -12,9 +12,6 @@ import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from './home/home.component';
 import {FavoritesComponent} from "./favorites/favorites.component";
-import { ArtistComponent } from './artist/artist.component';
-import { AlbumComponent } from './album/album.component';
-import { TrackComponent } from './track/track.component';
 
 registerLocaleData(localeFr);
 
@@ -25,9 +22,6 @@ registerLocaleData(localeFr);
     FooterComponent,
     HomeComponent,
     FavoritesComponent,
-    ArtistComponent,
-    AlbumComponent,
-    TrackComponent
   ],
   imports: [
     BrowserModule,

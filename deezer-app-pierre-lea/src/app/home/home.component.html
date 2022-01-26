@@ -11,7 +11,7 @@
             <div class="small text-muted">{{ item.nb_fan | number }} fans</div>
           </div>
           <div class="col-md-1">
-            <img (click)="homeAddArtist(item)" src="{{ this.tempImage }}" alt="not favorite" height="40" width="40">
+            <img (click)="manageArtistFavorite(item)" src="{{ this.favoriteslist.containsArtist(item.name) ? this.favImage : this.noFavImage }}" alt="not favorite" height="40" width="40">
           </div>
         </div>
       </li>
@@ -43,7 +43,7 @@
             </div>
           </div>
           <div class="col-md-1">
-              <img (click)="homeAddTrack(item)" src="{{ this.tempImage }}" alt="not favorite" height="40" width="40">
+              <img (click)="manageTrackFavorite(item)" src="{{ this.favoriteslist.containsTrack(item.title) ? this.favImage : this.noFavImage }}" alt="not favorite" height="40" width="40">
           </div>
         </div>
       </li>
@@ -67,8 +67,8 @@
             <div>{{ item.title }}</div>
             <div class="small text-muted">{{ item.artist.name }}</div>
           </div>
-          <div *ngIf="AlbumBool" class="col-md-1">
-            <img (click)="homeAddAlbum(item)" src="{{ this.tempImage }}" alt="not favorite" height="40" width="40">
+          <div class="col-md-1">
+            <img (click)="manageAlbumFavorite(item)" src="{{ this.favoriteslist.containsAlbum(item.title) ? this.favImage : this.noFavImage }}" alt="not favorite" height="40" width="40">
           </div>
         </div>
       </li>

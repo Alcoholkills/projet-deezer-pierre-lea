@@ -14,14 +14,10 @@ export class HomeComponent implements OnInit {
   public TrackBool = true;
   public favImage = "assets/fav.svg";
   public noFavImage = "assets/not-fav.svg";
-  public tempImage = "assets/not-fav.svg";
 
   constructor(public deezerService: DeezerService,
               public paginationService: PaginationService,
               public favoriteslist: FavoriteslistService) {
-    this.deezerAlbumData();
-    console.log("GUACAMOLE");
-    console.log(deezerService.responseAlbum.data);
   }
 
   ngOnInit(): void {
@@ -51,40 +47,28 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public homeAddAlbum(item: any): void {
-    this.favoriteslist.addAlbum(item.cover_small, item.title, item.artist.name);
-    if (this.AlbumBool) {
-      this.tempImage = this.favImage;
+  public manageAlbumFavorite(item: any): void {
+    if (this.favoriteslist.containsAlbum(item.title)) {
+      this.favoriteslist.removeAlbum(item.title);
     } else {
-      this.tempImage = this.noFavImage;
+      this.favoriteslist.addAlbum(item.cover_small, item.title, item.artist.name);
     }
-    this.AlbumBool = !this.AlbumBool;
   }
 
-  public homeAddArtist(item: any): void {
-    this.favoriteslist.addArtist(item.picture_small, item.name);
-    if (this.ArtistBool) {
-      this.tempImage = this.favImage;
+  public manageArtistFavorite(item: any): void {
+    if (this.favoriteslist.containsArtist(item.name)) {
+      this.favoriteslist.removeArtist(item.name);
     } else {
-      this.tempImage = this.noFavImage;
+      this.favoriteslist.addArtist(item.picture_small, item.name);
     }
-    this.ArtistBool = !this.ArtistBool;
   }
 
-  public homeAddTrack(item: any): void {
-    this.favoriteslist.addTrack(item.album.cover_small, item.title, item.artist.name)
-    if (this.TrackBool) {
-      this.tempImage = this.favImage;
+  public manageTrackFavorite(item: any): void {
+    if (this.favoriteslist.containsTrack(item.title)) {
+      this.favoriteslist.removeTrack(item.title);
     } else {
-      this.tempImage = this.noFavImage;
+      this.favoriteslist.addTrack(item.album.cover_small, item.title, item.artist.name);
     }
-    this.TrackBool = !this.TrackBool;
   }
 
-  public deezerAlbumData(): void {
-    let item: any;
-    for (item in this.deezerService.responseAlbum.data){
-      item.set("bool", false);
-    }
-  }
 }
